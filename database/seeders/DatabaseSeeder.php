@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Role;
+use App\Models\Permission;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +22,16 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $adminRole = Role::create(['name' => 'admin']);
+        $editorRole = Role::create(['name' => 'editor']);
+
+        $editPostsPermission = Permission::create(['name' => 'edit_posts']);
+        $deletePostsPermission = Permission::create(['name' => 'delete_posts']);
+
+        $adminRole->givePermissionTo($editPostsPermission);
+        $adminRole->givePermissionTo($deletePostsPermission);
+        $editorRole->givePermissionTo($editPostsPermission);
+
     }
 }
