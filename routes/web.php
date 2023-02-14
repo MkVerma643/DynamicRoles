@@ -26,12 +26,12 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
-    Route::post('roles', [RoleController::class, 'store'])->name('roles.store');
     Route::get('roles/create', [RoleController::class, 'create'])->name('roles.create');
+    Route::post('roles', [RoleController::class, 'store'])->name('roles.store');
     Route::get('roles/{item}', [RoleController::class, 'show'])->name('roles.show');
+    Route::get('roles/{item}/edit', [RoleController::class, 'edit'])->name('roles.edit');
     Route::put('roles/{item}', [RoleController::class, 'update'])->name('roles.update');
     Route::delete('roles/{item}', [RoleController::class, 'destroy'])->name('roles.destroy');
-    Route::get('roles/{item}/edit', [RoleController::class, 'edit'])->name('roles.edit');
 
     Route::get('permissions', [PermissionController::class, 'index'])->name('permissions.index');
     Route::post('permissions', [PermissionController::class, 'store'])->name('permissions.store');
@@ -44,8 +44,6 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
-
 
 Auth::routes();
 
